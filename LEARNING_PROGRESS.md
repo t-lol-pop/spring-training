@@ -14,7 +14,7 @@
 | 3 | REST API設計 | リソース設計、DTO、バリデーション、例外ハンドリング | 完了 |
 | 4 | データベース設計 | JPA、Flyway、トランザクション境界、整合性制約 | 完了 |
 | 5 | テスト | JUnit5/Mockito/Testcontainers、テスト容易な設計 | 完了 |
-| 6 | SOLID原則（重点） | 違反コードのレビュー→改善→模範解答 | 未着手 |
+| 6 | SOLID原則（重点） | 違反コードのレビュー→改善→模範解答 | 進行中 |
 | 7 | リファクタリング | Fowlerの手法で既存コードを段階的に改善 | 未着手 |
 | 8 | DDD基礎 | Entity/VO/Aggregate/Repository/Domain Service | 未着手 |
 | 9 | クリーンアーキテクチャ | レイヤー分離、依存方向、パッケージ設計 | 未着手 |
@@ -45,9 +45,10 @@ Java 21 / Spring Boot 3.x / Gradle / Spring Web / Spring Data JPA / PostgreSQL /
 
 ## 現在地点
 
-- **現在のLevel**: 5（テスト、Testcontainers） 完了 → 次はLevel6
-- **直近の課題**: [assignments/level5-01-testcontainers-mockito.md](./assignments/level5-01-testcontainers-mockito.md) 完了
-- **次のアクション**: Level6（SOLID原則、重点課題）の第1課題を出題する
+- **現在のLevel**: 6（SOLID原則、重点課題）
+- **直近の課題**: [assignments/level6-01-god-object-review.md](./assignments/level6-01-god-object-review.md)
+- **次のアクション**: ユーザーのレビュー・改善案を待っている（提出待ち）
+- **Git運用**: 2026-07-18から、課題ごとにブランチを切りPRを作成する運用に変更（詳細は[CLAUDE.md](./CLAUDE.md)）。本課題は`level6-01-god-object-review`ブランチで進行中
 - **環境メモ**: `MemberControllerTest`はTestcontainers管理のPostgreSQLで完全に自己完結（`docker compose up`不要）。`MemberServiceTest`はMockitoによる単体テスト（Springコンテナ不使用）。**重要な既知の設定**: `build.gradle`の`test`タスクに`systemProperty "api.version", "1.41"`が必須（このマシンのDocker DesktopとTestcontainersのAPIバージョン不整合を回避するため。詳細は[SETUP.md](./SETUP.md)）
 
 ---
@@ -65,9 +66,10 @@ Java 21 / Spring Boot 3.x / Gradle / Spring Web / Spring Data JPA / PostgreSQL /
 | Level3-1 | 会員登録・照会のREST API | [assignments/level3-01-member-rest-api.md](./assignments/level3-01-member-rest-api.md) | 完了（2026-07-06） |
 | Level4-1 | PostgreSQL + FlywayとMemberのJPA化 | [assignments/level4-01-jpa-postgres.md](./assignments/level4-01-jpa-postgres.md) | 完了（2026-07-12） |
 | Level5-1 | Testcontainers + Mockito | [assignments/level5-01-testcontainers-mockito.md](./assignments/level5-01-testcontainers-mockito.md) | 完了（2026-07-18） |
+| Level6-1 | God Objectのレビューとリファクタリング設計 | [assignments/level6-01-god-object-review.md](./assignments/level6-01-god-object-review.md) | 出題済み・提出待ち |
 
 ---
 
 ## 次回課題（予告メモ）
 
-- Level6（SOLID原則、重点課題）に進む予定。CLAUDE.mdの方針通り、意図的にSOLID違反のコード（God Object、巨大Serviceなど）を教材として提示する回になる
+- Level6-1完了後 → 改善版の実装、その後Level7（リファクタリング）へ
