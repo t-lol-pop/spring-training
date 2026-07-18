@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.training.issuing.point.PointCalculatorTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-07-18T06:31:09" hostname="nishimuratoshihironoMacBook-Air.local" time="0.001">
-  <properties/>
-  <testcase name="付与率1%のとき、10000円の購入で100ポイント付与される" classname="com.training.issuing.point.PointCalculatorTest" time="0.0"/>
-  <testcase name="付与率5%のとき、10000円の購入で500ポイント付与される" classname="com.training.issuing.point.PointCalculatorTest" time="0.001"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
