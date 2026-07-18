@@ -3,6 +3,8 @@ package com.training.issuing.onboarding;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.training.issuing.domain.Member;
@@ -11,50 +13,39 @@ import com.training.issuing.member.MemberRepository;
 @Service
 public class MemberOnboardingService {
 
-    private final MemberRepository memberRepository;
+    private static final Logger log = LoggerFactory.getLogger(MemberOnboardingService.class);
 
-    public MemberOnboardingService(MemberRepository memberRepository) {
+    private final MemberRepository memberRepository;
+    private final ChannelBonusCalculator channelBonusCalculator;
+    private final EmailSender emailSender;
+    private final SmsSender smsSender;
+
+    public MemberOnboardingService(
+            MemberRepository memberRepository,
+            ChannelBonusCalculator channelBonusCalculator,
+            EmailSender emailSender,
+            SmsSender smsSender) {
         this.memberRepository = memberRepository;
+        this.channelBonusCalculator = channelBonusCalculator;
+        this.emailSender = emailSender;
+        this.smsSender = smsSender;
     }
 
     public String onboard(String name, String channel) {
-        System.out.println("[LOG] onboard start: name=" + name + ", channel=" + channel);
-
-        if (name == null || name.length() == 0) {
-            System.out.println("[LOG] validation failed: name is empty");
-            throw new IllegalArgumentException("name is required");
-        }
-        if (name.length() > 100) {
-            System.out.println("[LOG] validation failed: name too long");
-            throw new IllegalArgumentException("name is too long");
-        }
+        log.info("onboard start: name={}, channel={}", name, channel);
 
         String id = UUID.randomUUID().toString();
         Member member = new Member(id, name, LocalDate.now());
         memberRepository.save(member);
-        System.out.println("[LOG] member saved: id=" + id);
+        log.info("member saved: id={}", id);
 
-        int bonusPoints;
-        if (channel.equals("WEB")) {
-            bonusPoints = 100;
-        } else if (channel.equals("APP")) {
-            bonusPoints = 200;
-        } else if (channel.equals("STORE")) {
-            bonusPoints = 50;
-        } else {
-            bonusPoints = 0;
-        }
-        System.out.println("[LOG] bonus points calculated: " + bonusPoints);
+        int bonusPoints = channelBonusCalculator.calculate(channel);
+        log.info("bonus points calculated: {}", bonusPoints);
 
-        EmailSender emailSender = new EmailSender();
         emailSender.send(name, "ご登録ありがとうございます。" + bonusPoints + "ポイントを付与しました。");
-        System.out.println("[LOG] email sent");
-
-        SmsSender smsSender = new SmsSender();
         smsSender.send(name, "登録完了のお知らせ");
-        System.out.println("[LOG] sms sent");
+        log.info("onboard end: id={}", id);
 
-        System.out.println("[LOG] onboard end: id=" + id);
         return id;
     }
 }
