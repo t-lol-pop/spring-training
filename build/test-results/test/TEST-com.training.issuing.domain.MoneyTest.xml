@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.training.issuing.domain.MoneyTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-07-18T06:31:06" hostname="nishimuratoshihironoMacBook-Air.local" time="0.006">
+  <properties/>
+  <testcase name="金額が同じMoney同士はequalsでtrueになる" classname="com.training.issuing.domain.MoneyTest" time="0.001"/>
+  <testcase name="2 - 2 は 0 になる" classname="com.training.issuing.domain.MoneyTest" time="0.0"/>
+  <testcase name="2 + 3 は 5 になる" classname="com.training.issuing.domain.MoneyTest" time="0.0"/>
+  <testcase name="Moneyは不変" classname="com.training.issuing.domain.MoneyTest" time="0.0"/>
+  <testcase name="2 - 1 は 1 になる" classname="com.training.issuing.domain.MoneyTest" time="0.0"/>
+  <testcase name="金額が異なるMoney同士はequalsでfalseになる" classname="com.training.issuing.domain.MoneyTest" time="0.0"/>
+  <testcase name="減算結果がマイナスとなった場合に例外が発生することの確認" classname="com.training.issuing.domain.MoneyTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

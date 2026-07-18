@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.training.issuing.member.MemberServiceTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-07-18T06:31:09" hostname="nishimuratoshihironoMacBook-Air.local" time="0.12">
+  <properties/>
+  <testcase name="findByIdで存在するIDを指定すると、その会員のレスポンスが返る" classname="com.training.issuing.member.MemberServiceTest" time="0.11"/>
+  <testcase name="registerは新規会員をリポジトリに保存し、ACTIVE状態のレスポンスを返す" classname="com.training.issuing.member.MemberServiceTest" time="0.005"/>
+  <testcase name="findByIdで存在しないIDを指定すると、MemberNotFoundExceptionが投げられる" classname="com.training.issuing.member.MemberServiceTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

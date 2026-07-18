@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: card-issuing-training
+  datasource:
+    url: jdbc:postgresql://localhost:5433/issuing
+    username: issuing
+    password: issuing
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+
+issuing:
+  point:
+    rate: 0.01

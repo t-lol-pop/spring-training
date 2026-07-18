@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./gradlew compileJava)",
+      "Bash(mkdir -p /tmp/precheck_out)",
+      "Bash(zsh -ic 'javac -d /tmp/precheck_out src/main/java/com/training/issuing/domain/MinusException.java')",
+      "Bash(zsh -ic 'javac -d /tmp/precheck_out src/main/java/com/training/issuing/domain/Member.java')",
+      "Bash(mkdir -p /tmp/precheck_out2)",
+      "Bash(zsh -ic 'javac -d /tmp/precheck_out2 src/main/java/com/training/issuing/domain/Member.java')",
+      "Bash(./gradlew compileTestJava)",
+      "Bash(./gradlew test *)",
+      "Bash(git -C /Users/toshihiro/work/java/training rev-parse --is-inside-work-tree)",
+      "Bash(./gradlew build *)",
+      "Bash(timeout 20 ./gradlew bootRun)",
+      "Bash(brew list *)",
+      "Bash(docker compose *)",
+      "Bash(docker exec *)",
+      "Bash(lsof -nP -iTCP:5432 -sTCP:LISTEN)",
+      "Bash(PGPASSWORD=issuing psql -h 127.0.0.1 -p 5432 -U issuing -d issuing -c \"SELECT 1\")",
+      "Bash(PGPASSWORD=issuing psql -h 127.0.0.1 -p 5433 -U issuing -d issuing -c \"SELECT 1\")",
+      "Read(//private/tmp/**)",
+      "Bash(awk '/^```mermaid$/{flag=1;next}/^```$/{flag=0}flag' /Users/toshihiro/work/java/training/docs/class-diagram.md)",
+      "Bash(npx -y @mermaid-js/mermaid-cli -i full.mmd -o full.svg)",
+      "Bash(grep -n '```' /Users/toshihiro/work/java/training/docs/class-diagram.md)",
+      "Bash(xxd)"
+    ]
+  }
+}
