@@ -13,7 +13,7 @@
 | 2 | Spring Boot基礎 | DI/IoC、Bean、設定の仕組みを理解し最小アプリを起動 | 完了 |
 | 3 | REST API設計 | リソース設計、DTO、バリデーション、例外ハンドリング | 完了 |
 | 4 | データベース設計 | JPA、Flyway、トランザクション境界、整合性制約 | 完了 |
-| 5 | テスト | JUnit5/Mockito/Testcontainers、テスト容易な設計 | 進行中 |
+| 5 | テスト | JUnit5/Mockito/Testcontainers、テスト容易な設計 | 完了 |
 | 6 | SOLID原則（重点） | 違反コードのレビュー→改善→模範解答 | 未着手 |
 | 7 | リファクタリング | Fowlerの手法で既存コードを段階的に改善 | 未着手 |
 | 8 | DDD基礎 | Entity/VO/Aggregate/Repository/Domain Service | 未着手 |
@@ -45,10 +45,10 @@ Java 21 / Spring Boot 3.x / Gradle / Spring Web / Spring Data JPA / PostgreSQL /
 
 ## 現在地点
 
-- **現在のLevel**: 5（テスト、Testcontainers）
-- **直近の課題**: [assignments/level5-01-testcontainers-mockito.md](./assignments/level5-01-testcontainers-mockito.md)
-- **次のアクション**: ユーザーの実装物を待っている（未提出）
-- **環境メモ**: Docker Desktop起動確認済み。PostgreSQLは`docker-compose.yml`で起動（ホスト側ポートは**5433**、既存のローカルPostgreSQLとの衝突を避けるため。詳細は[SETUP.md](./SETUP.md)）。`Member`はJPA（`MemberJpaEntity`+`MemberJpaRepository`）+ Flywayで永続化済み。**既知の課題**: `MemberControllerTest`が実際のDocker上DBに依存しており、Docker未起動だと失敗する（本課題でTestcontainers導入により解消予定）
+- **現在のLevel**: 5（テスト、Testcontainers） 完了 → 次はLevel6
+- **直近の課題**: [assignments/level5-01-testcontainers-mockito.md](./assignments/level5-01-testcontainers-mockito.md) 完了
+- **次のアクション**: Level6（SOLID原則、重点課題）の第1課題を出題する
+- **環境メモ**: `MemberControllerTest`はTestcontainers管理のPostgreSQLで完全に自己完結（`docker compose up`不要）。`MemberServiceTest`はMockitoによる単体テスト（Springコンテナ不使用）。**重要な既知の設定**: `build.gradle`の`test`タスクに`systemProperty "api.version", "1.41"`が必須（このマシンのDocker DesktopとTestcontainersのAPIバージョン不整合を回避するため。詳細は[SETUP.md](./SETUP.md)）
 
 ---
 
@@ -64,10 +64,10 @@ Java 21 / Spring Boot 3.x / Gradle / Spring Web / Spring Data JPA / PostgreSQL /
 | Level2-2 | 外部設定（application.yml）とプロファイル | [assignments/level2-02-external-config.md](./assignments/level2-02-external-config.md) | 完了（2026-07-05） |
 | Level3-1 | 会員登録・照会のREST API | [assignments/level3-01-member-rest-api.md](./assignments/level3-01-member-rest-api.md) | 完了（2026-07-06） |
 | Level4-1 | PostgreSQL + FlywayとMemberのJPA化 | [assignments/level4-01-jpa-postgres.md](./assignments/level4-01-jpa-postgres.md) | 完了（2026-07-12） |
-| Level5-1 | Testcontainers + Mockito | [assignments/level5-01-testcontainers-mockito.md](./assignments/level5-01-testcontainers-mockito.md) | 出題済み・提出待ち |
+| Level5-1 | Testcontainers + Mockito | [assignments/level5-01-testcontainers-mockito.md](./assignments/level5-01-testcontainers-mockito.md) | 完了（2026-07-18） |
 
 ---
 
 ## 次回課題（予告メモ）
 
-- Level5-1完了後 → Level6（SOLID原則、重点課題）に進む予定
+- Level6（SOLID原則、重点課題）に進む予定。CLAUDE.mdの方針通り、意図的にSOLID違反のコード（God Object、巨大Serviceなど）を教材として提示する回になる

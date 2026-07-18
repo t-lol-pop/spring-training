@@ -96,6 +96,13 @@ brew install --cask docker
 
 **重要（ポート衝突の既知の問題、2026-07-12確認）**: このマシンにはDocker以外に、ローカルにインストールされた別のPostgreSQLプロセスが`127.0.0.1:5432`ですでにリッスンしている。`docker-compose.yml`でPostgreSQLコンテナのホスト側ポートを標準の`5432`のままにすると、`localhost:5432`への接続が意図せずそちらのローカルプロセスにルーティングされ、「role "xxx" does not exist」のような紛らわしいエラーになる。本プロジェクトの`docker-compose.yml`ではホスト側ポートを**`5433`**に変更して回避している（`application.yml`の`spring.datasource.url`も`jdbc:postgresql://localhost:5433/issuing`に合わせてあるので、変更しないこと）。
 
+**重要（Testcontainers × 新しいDocker Desktopのバージョン不整合、2026-07-18確認）**: このマシンのDocker Desktop（4.80.0、Engine 29.6.1、`MinAPIVersion` 1.40）は、Docker API v1.40未満のリクエストを`Status 400`で拒否する。ところがTestcontainers（内部で使う`docker-java`ライブラリ）は、画像の存在確認（`InspectImageCmdExec`）などの一部の内部処理で、古いAPIバージョン（v1.32）を使おうとするため、`client version 1.32 is too old`という紛らわしいエラーで**Testcontainersのコンテナ起動そのものが失敗する**。
+
+- 症状: `curl --unix-socket /var/run/docker.sock ...`では正常に応答が返るのに、Testcontainers経由だと`Could not find a valid Docker environment`や`BadRequestException`が出る
+- 原因の切り分け方: `curl --unix-socket /var/run/docker.sock http://localhost/v1.24/version`のように、意図的に古いAPIバージョンを指定したパスにアクセスして`400`が返るか確認する
+- 対応: `build.gradle`の`test`タスクに`systemProperty "api.version", "1.41"`を追加し、`docker-java`に新しいAPIバージョンを明示的に使わせることで解消した（Testcontainersのバージョンを最新（1.21.3）にしても、これ単体では解消しなかった。あわせて必要）
+- Testcontainersのバージョンアップ（この対応をしなくても済むようになる可能性がある）で将来的に不要になるかもしれないが、現時点ではこの設定が必須
+
 ---
 
 ## 4. プロジェクトの始め方
