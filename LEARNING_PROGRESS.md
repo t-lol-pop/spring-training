@@ -46,9 +46,9 @@ Java 21 / Spring Boot 3.x / Gradle / Spring Web / Spring Data JPA / PostgreSQL /
 ## 現在地点
 
 - **現在のLevel**: 7（リファクタリング）
-- **直近の課題**: [assignments/level7-01-channel-enum-refactor.md](./assignments/level7-01-channel-enum-refactor.md)
-- **次のアクション**: ユーザーの実装物を待っている（未提出）
-- **Git運用**: 2026-07-18から、課題ごとにブランチを切りPRを作成する運用（詳細は[CLAUDE.md](./CLAUDE.md)）。Issue #4はPR #6として対応・マージ・クローズ済み
+- **直近の課題**: [assignments/level7-01-channel-enum-refactor.md](./assignments/level7-01-channel-enum-refactor.md) 完了
+- **次のアクション**: Level7の別課題（通知の抽象化、`MemberJpaEntity.toDomain()`の再構築ロジック改善など）に進むか、Level8へ
+- **Git運用**: 2026-07-18から、課題ごとにブランチを切りPRを作成する運用（詳細は[CLAUDE.md](./CLAUDE.md)）。重要な設計判断はレビューログ+PRコメントの両方に記録する運用を追加（2026-07-19〜）
 - **環境メモ**: `MemberControllerTest`はTestcontainers管理のPostgreSQLで完全に自己完結（`docker compose up`不要）。`MemberServiceTest`はMockitoによる単体テスト（Springコンテナ不使用）。**重要な既知の設定**: `build.gradle`の`test`タスクに`systemProperty "api.version", "1.41"`が必須（このマシンのDocker DesktopとTestcontainersのAPIバージョン不整合を回避するため。詳細は[SETUP.md](./SETUP.md)）
 
 ---
@@ -67,7 +67,7 @@ Java 21 / Spring Boot 3.x / Gradle / Spring Web / Spring Data JPA / PostgreSQL /
 | Level4-1 | PostgreSQL + FlywayとMemberのJPA化 | [assignments/level4-01-jpa-postgres.md](./assignments/level4-01-jpa-postgres.md) | 完了（2026-07-12） |
 | Level5-1 | Testcontainers + Mockito | [assignments/level5-01-testcontainers-mockito.md](./assignments/level5-01-testcontainers-mockito.md) | 完了（2026-07-18） |
 | Level6-1 | God Objectのレビューとリファクタリング設計 | [assignments/level6-01-god-object-review.md](./assignments/level6-01-god-object-review.md) | 完了（2026-07-18、[Issue #4](https://github.com/t-lol-pop/spring-training/issues/4)はPR #6で解消済み） |
-| Level7-1 | `channel`のenum化（Primitive Obsessionの解消） | [assignments/level7-01-channel-enum-refactor.md](./assignments/level7-01-channel-enum-refactor.md) | 出題済み・提出待ち |
+| Level7-1 | `channel`のenum化（Primitive Obsessionの解消） | [assignments/level7-01-channel-enum-refactor.md](./assignments/level7-01-channel-enum-refactor.md) | 完了（2026-07-19） |
 
 ---
 
