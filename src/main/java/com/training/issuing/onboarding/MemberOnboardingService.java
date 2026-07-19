@@ -3,13 +3,17 @@ package com.training.issuing.onboarding;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import jakarta.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import com.training.issuing.domain.Member;
 import com.training.issuing.member.MemberRepository;
 
+@Validated
 @Service
 public class MemberOnboardingService {
 
@@ -31,19 +35,19 @@ public class MemberOnboardingService {
         this.smsSender = smsSender;
     }
 
-    public String onboard(String name, String channel) {
-        log.info("onboard start: name={}, channel={}", name, channel);
+    public String onboard(@Valid OnboardRequest request) {
+        log.info("onboard start: name={}, channel={}", request.name(), request.channel());
 
         String id = UUID.randomUUID().toString();
-        Member member = new Member(id, name, LocalDate.now());
+        Member member = new Member(id, request.name(), LocalDate.now());
         memberRepository.save(member);
         log.info("member saved: id={}", id);
 
-        int bonusPoints = channelBonusCalculator.calculate(channel);
+        int bonusPoints = channelBonusCalculator.calculate(request.channel());
         log.info("bonus points calculated: {}", bonusPoints);
 
-        emailSender.send(name, "ご登録ありがとうございます。" + bonusPoints + "ポイントを付与しました。");
-        smsSender.send(name, "登録完了のお知らせ");
+        emailSender.send(request.name(), "ご登録ありがとうございます。" + bonusPoints + "ポイントを付与しました。");
+        smsSender.send(request.name(), "登録完了のお知らせ");
         log.info("onboard end: id={}", id);
 
         return id;
