@@ -63,4 +63,13 @@ class MemberOnboardingServiceTest {
         assertThatThrownBy(() -> memberOnboardingService.onboard(new OnboardRequest("山田太郎", "")))
                 .isInstanceOf(ConstraintViolationException.class);
     }
+
+    @Test
+    @DisplayName("氏名が100文字を超える場合はConstraintViolationExceptionが投げられる")
+    void onboardThrowsWhenNameIsTooLong() {
+        String tooLongName = "あ".repeat(101);
+
+        assertThatThrownBy(() -> memberOnboardingService.onboard(new OnboardRequest(tooLongName, "WEB")))
+                .isInstanceOf(ConstraintViolationException.class);
+    }
 }
