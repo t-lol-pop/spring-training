@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 public class AppChannelBonusPolicy implements ChannelBonusPolicy {
 
     @Override
-    public boolean supports(String channel) {
-        return "APP".equals(channel);
+    public boolean supports(Channel channel) {
+        return channel == Channel.APP;
     }
 
     @Override

@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 public class WebChannelBonusPolicy implements ChannelBonusPolicy {
 
     @Override
-    public boolean supports(String channel) {
-        return "WEB".equals(channel);
+    public boolean supports(Channel channel) {
+        return channel == Channel.WEB;
     }
 
     @Override

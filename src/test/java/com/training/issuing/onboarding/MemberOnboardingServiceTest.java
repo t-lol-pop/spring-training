@@ -45,7 +45,7 @@ class MemberOnboardingServiceTest {
     void onboardSucceedsWithValidRequest() {
         when(memberRepository.save(any())).thenAnswer(invocation -> invocation.getArgument(0));
 
-        String id = memberOnboardingService.onboard(new OnboardRequest("山田太郎", "WEB"));
+        String id = memberOnboardingService.onboard(new OnboardRequest("山田太郎", Channel.WEB));
 
         assertThat(id).isNotBlank();
     }
@@ -53,14 +53,14 @@ class MemberOnboardingServiceTest {
     @Test
     @DisplayName("氏名が空の場合はConstraintViolationExceptionが投げられる")
     void onboardThrowsWhenNameIsBlank() {
-        assertThatThrownBy(() -> memberOnboardingService.onboard(new OnboardRequest("", "WEB")))
+        assertThatThrownBy(() -> memberOnboardingService.onboard(new OnboardRequest("", Channel.WEB)))
                 .isInstanceOf(ConstraintViolationException.class);
     }
 
     @Test
-    @DisplayName("チャネルが空の場合はConstraintViolationExceptionが投げられる")
-    void onboardThrowsWhenChannelIsBlank() {
-        assertThatThrownBy(() -> memberOnboardingService.onboard(new OnboardRequest("山田太郎", "")))
+    @DisplayName("チャネルがnullの場合はConstraintViolationExceptionが投げられる")
+    void onboardThrowsWhenChannelIsNull() {
+        assertThatThrownBy(() -> memberOnboardingService.onboard(new OnboardRequest("山田太郎", null)))
                 .isInstanceOf(ConstraintViolationException.class);
     }
 
@@ -69,7 +69,7 @@ class MemberOnboardingServiceTest {
     void onboardThrowsWhenNameIsTooLong() {
         String tooLongName = "あ".repeat(101);
 
-        assertThatThrownBy(() -> memberOnboardingService.onboard(new OnboardRequest(tooLongName, "WEB")))
+        assertThatThrownBy(() -> memberOnboardingService.onboard(new OnboardRequest(tooLongName, Channel.WEB)))
                 .isInstanceOf(ConstraintViolationException.class);
     }
 }
