@@ -2,7 +2,7 @@ package com.training.issuing.onboarding;
 
 public interface ChannelBonusPolicy {
 
-    boolean supports(String channel);
+    boolean supports(Channel channel);
 
     int calculateBonusPoints();
 }

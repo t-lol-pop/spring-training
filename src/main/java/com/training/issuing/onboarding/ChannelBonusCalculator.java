@@ -13,7 +13,7 @@ public class ChannelBonusCalculator {
         this.policies = policies;
     }
 
-    public int calculate(String channel) {
+    public int calculate(Channel channel) {
         return policies.stream()
                 .filter(policy -> policy.supports(channel))
                 .findFirst()
