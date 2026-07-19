@@ -14,8 +14,8 @@
 | 3 | REST API設計 | リソース設計、DTO、バリデーション、例外ハンドリング | 完了 |
 | 4 | データベース設計 | JPA、Flyway、トランザクション境界、整合性制約 | 完了 |
 | 5 | テスト | JUnit5/Mockito/Testcontainers、テスト容易な設計 | 完了 |
-| 6 | SOLID原則（重点） | 違反コードのレビュー→改善→模範解答 | 完了（残課題あり） |
-| 7 | リファクタリング | Fowlerの手法で既存コードを段階的に改善 | 未着手 |
+| 6 | SOLID原則（重点） | 違反コードのレビュー→改善→模範解答 | 完了 |
+| 7 | リファクタリング | Fowlerの手法で既存コードを段階的に改善 | 進行中 |
 | 8 | DDD基礎 | Entity/VO/Aggregate/Repository/Domain Service | 未着手 |
 | 9 | クリーンアーキテクチャ | レイヤー分離、依存方向、パッケージ設計 | 未着手 |
 | 10 | 実践課題 | オーソリ〜クリアリングの一連フローを設計・実装・レビュー | 未着手 |
@@ -45,10 +45,10 @@ Java 21 / Spring Boot 3.x / Gradle / Spring Web / Spring Data JPA / PostgreSQL /
 
 ## 現在地点
 
-- **現在のLevel**: 6（SOLID原則、重点課題） 完了 → 次はLevel7
-- **直近の課題**: [assignments/level6-01-god-object-review.md](./assignments/level6-01-god-object-review.md) 完了（残課題は[Issue #4](https://github.com/t-lol-pop/spring-training/issues/4)に切り出し済み）
-- **次のアクション**: PR #3のマージ後、Level7（リファクタリング）の第1課題を出題する
-- **Git運用**: 2026-07-18から、課題ごとにブランチを切りPRを作成する運用に変更（詳細は[CLAUDE.md](./CLAUDE.md)）。Level6-1では「悪いコード」と「リファクタリング」を別PRに分け、それぞれに`/code-review`（Standards/Spec二軸）を実行する進め方を試した
+- **現在のLevel**: 7（リファクタリング）
+- **直近の課題**: [assignments/level7-01-channel-enum-refactor.md](./assignments/level7-01-channel-enum-refactor.md)
+- **次のアクション**: ユーザーの実装物を待っている（未提出）
+- **Git運用**: 2026-07-18から、課題ごとにブランチを切りPRを作成する運用（詳細は[CLAUDE.md](./CLAUDE.md)）。Issue #4はPR #6として対応・マージ・クローズ済み
 - **環境メモ**: `MemberControllerTest`はTestcontainers管理のPostgreSQLで完全に自己完結（`docker compose up`不要）。`MemberServiceTest`はMockitoによる単体テスト（Springコンテナ不使用）。**重要な既知の設定**: `build.gradle`の`test`タスクに`systemProperty "api.version", "1.41"`が必須（このマシンのDocker DesktopとTestcontainersのAPIバージョン不整合を回避するため。詳細は[SETUP.md](./SETUP.md)）
 
 ---
@@ -66,10 +66,11 @@ Java 21 / Spring Boot 3.x / Gradle / Spring Web / Spring Data JPA / PostgreSQL /
 | Level3-1 | 会員登録・照会のREST API | [assignments/level3-01-member-rest-api.md](./assignments/level3-01-member-rest-api.md) | 完了（2026-07-06） |
 | Level4-1 | PostgreSQL + FlywayとMemberのJPA化 | [assignments/level4-01-jpa-postgres.md](./assignments/level4-01-jpa-postgres.md) | 完了（2026-07-12） |
 | Level5-1 | Testcontainers + Mockito | [assignments/level5-01-testcontainers-mockito.md](./assignments/level5-01-testcontainers-mockito.md) | 完了（2026-07-18） |
-| Level6-1 | God Objectのレビューとリファクタリング設計 | [assignments/level6-01-god-object-review.md](./assignments/level6-01-god-object-review.md) | 完了（2026-07-18、[Issue #4](https://github.com/t-lol-pop/spring-training/issues/4)残） |
+| Level6-1 | God Objectのレビューとリファクタリング設計 | [assignments/level6-01-god-object-review.md](./assignments/level6-01-god-object-review.md) | 完了（2026-07-18、[Issue #4](https://github.com/t-lol-pop/spring-training/issues/4)はPR #6で解消済み） |
+| Level7-1 | `channel`のenum化（Primitive Obsessionの解消） | [assignments/level7-01-channel-enum-refactor.md](./assignments/level7-01-channel-enum-refactor.md) | 出題済み・提出待ち |
 
 ---
 
 ## 次回課題（予告メモ）
 
-- Level7（リファクタリング）に進む予定。Issue #4（バリデーション復活）を最初の題材にしてもよい
+- Level7-1完了後、Level7の別課題（通知の抽象化、`MemberJpaEntity.toDomain()`の再構築ロジック改善など）に進むか、Level8（DDD基礎）へ
